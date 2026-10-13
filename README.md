@@ -1,4 +1,4 @@
-<img width="1917" height="986" alt="image" src="https://github.com/user-attachments/assets/0ea42b85-afe9-4e4c-8eba-3d46a01fda8e" /># FacturaPro EC
+# FacturaPro EC
 
 Sistema de facturación e inventario para negocios ecuatorianos: ventas en punto de venta, compras, cuentas por cobrar, control de existencias, reportes y auditoría. Compuesto por un backend en Spring Boot y un frontend en React con TypeScript.
 
@@ -32,13 +32,21 @@ Highlights: backend-enforced roles (`@PreAuthorize`), CSRF-protected sessions, a
   <img src="docs/screenshots/punto-de-venta.png" alt="Punto de venta de FacturaPro EC: búsqueda de productos, totales con IVA y emisión de venta" width="48%" />
 </p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0ea42b85-afe9-4e4c-8eba-3d46a01fda8e" alt="Módulo de inventario de FacturaPro EC con existencias, costos y alertas de stock mínimo" width="48%" />
+  <img src="https://github.com/user-attachments/assets/7a6fef4b-0721-4ed3-a558-d1e9fda294b9" alt="Listado de ventas de FacturaPro EC con cliente, estado de pago y totales" width="48%" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/74db05a9-1fc2-4880-b765-60e6a655900d" alt="Catálogo de productos de FacturaPro EC con SKU, precios, margen y stock" width="48%" />
+  <img src="https://github.com/user-attachments/assets/4a333355-19bc-48ea-a64d-5d29c5bad1bb" alt="Cuentas por cobrar de FacturaPro EC con saldos, vencimientos y exportación a CSV" width="48%" />
+</p>
+
 ---
 
 ## Características
 
 - **Autenticación por sesión** (cookie `JSESSIONID`) con protección **CSRF** (`XSRF-TOKEN` / `X-XSRF-TOKEN`), bloqueo tras intentos fallidos y cambio obligatorio de contraseña temporal.
-<img width="1917" height="991" alt="image" src="https://github.com/user-attachments/assets/a3417339-83da-47b3-85a9-47f72cfcc043" />
-
 - **Roles y permisos reales**: `ADMINISTRADOR`, `GERENTE`, `VENDEDOR`, `BODEGA` aplicados en el backend con `@PreAuthorize` (401 sin sesión, 403 sin permiso).
 - **Productos y categorías**: SKU, código de barras, precios de compra/venta, margen, stock mínimo y categoría fiscal configurable.
 - **Punto de venta (POS)**: carrito con cantidades, precios y descuentos por línea; cliente opcional; emisión o borrador; pago inicial opcional; el **backend calcula siempre los importes oficiales**.
@@ -50,18 +58,6 @@ Highlights: backend-enforced roles (`@PreAuthorize`), CSRF-protected sessions, a
 - **Panel principal**: ventas de hoy/semana/mes, cartera por cobrar, productos con stock bajo, productos más vendidos, evolución de 14/30 días y actividad reciente.
 - **Auditoría**: registro inmutable de acciones (quién, qué, cuándo, qué entidad) consultable por usuarios con permiso.
 - **Configuración**: datos de la empresa, formato de numeración, tarifas de IVA, parámetros de inventario y sesión, editables desde la UI.
-<img width="1917" height="990" alt="image" src="https://github.com/user-attachments/assets/8ec508d8-ab0f-4d73-8690-c7448d38e6fe" />
-<img width="1917" height="985" alt="image" src="https://github.com/user-attachments/assets/40771710-ebe0-4466-84df-d8e34c582655" />
-<img width="1917" height="987" alt="image" src="https://github.com/user-attachments/assets/7a6fef4b-0721-4ed3-a558-d1e9fda294b9" />
-<img width="1917" height="982" alt="image" src="https://github.com/user-attachments/assets/4a333355-19bc-48ea-a64d-5d29c5bad1bb" />
-<img width="1916" height="987" alt="image" src="https://github.com/user-attachments/assets/74db05a9-1fc2-4880-b765-60e6a655900d" />
-<img width="1917" height="986" alt="image" src="https://github.com/user-attachments/assets/f5bc9da1-5991-467d-bdc5-5eb183583e28" />
-
-
-
-
-
-
 
 ## Stack tecnológico
 
