@@ -113,7 +113,8 @@ public class DashboardService {
     }
 
     private DaySales salesBetween(LocalDate from, LocalDate to) {
-        Object[] totals = reportQueries.salesTotals(from, to);
+        java.util.List<Object[]> rows = reportQueries.salesTotals(from, to);
+        Object[] totals = rows.isEmpty() ? null : rows.get(0);
         long count = totals == null || totals[1] == null ? 0 : ((Number) totals[1]).longValue();
         BigDecimal total = totals == null || totals[0] == null ? BigDecimal.ZERO : (BigDecimal) totals[0];
         return new DaySales(from, count, total);

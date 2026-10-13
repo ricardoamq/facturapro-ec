@@ -184,7 +184,7 @@ public class SaleService {
 
     @Transactional(readOnly = true)
     public Sale byNumberEntity(String number) {
-        return saleRepository.findByNumber(number)
+        return saleRepository.findWithItemsByNumber(number)
                 .orElseThrow(() -> new NotFoundException("Documento no encontrado."));
     }
 

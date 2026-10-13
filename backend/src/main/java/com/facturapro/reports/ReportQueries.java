@@ -98,20 +98,24 @@ public interface ReportQueries {
             """)
     List<Object[]> purchasesByDay(@Param("from") LocalDate from, @Param("to") LocalDate to);
 
+    /**
+     * Fila unica de agregado. Se declara como List&lt;Object[]&gt; porque el retorno
+     * Object[] directo Produce un array anidado [[suma, contador]] en Spring Data.
+     */
     @Query("""
             select coalesce(sum(s.total), 0), count(s)
             from Sale s
             where s.status = com.facturapro.sales.SaleStatus.ISSUED and s.saleDate between :from and :to
             """)
-    Object[] salesTotals(@Param("from") LocalDate from, @Param("to") LocalDate to);
+    List<Object[]> salesTotals(@Param("from") LocalDate from, @Param("to") LocalDate to);
 
     @Query("""
             select coalesce(sum(p.amount), 0), count(p)
             from Payment p
             where p.voided = false and p.paymentDate >= :fromInstant and p.paymentDate < :toInstant
             """)
-    Object[] paymentsTotals(@Param("fromInstant") java.time.Instant from,
-                            @Param("toInstant") java.time.Instant to);
+    List<Object[]> paymentsTotals(@Param("fromInstant") java.time.Instant from,
+                                  @Param("toInstant") java.time.Instant to);
 
     @Query("""
             select i.sku, i.productName, count(s), sum(i.quantity), sum(i.lineTotal)

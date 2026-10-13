@@ -74,7 +74,8 @@ public class ReportService {
     @Transactional(readOnly = true)
     public SalesSummary salesSummary(LocalDate from, LocalDate to) {
         validateRange(from, to);
-        Object[] totals = reportRepository.salesTotals(from, to);
+        List<Object[]> totalsRows = reportRepository.salesTotals(from, to);
+        Object[] totals = totalsRows.isEmpty() ? null : totalsRows.get(0);
         long count = totals == null || totals[1] == null ? 0 : ((Number) totals[1]).longValue();
         BigDecimal totalSales = totals == null || totals[0] == null ? BigDecimal.ZERO : (BigDecimal) totals[0];
 
@@ -217,7 +218,8 @@ public class ReportService {
     private BigDecimal paymentsReceived(LocalDate from, LocalDate to) {
         Instant fromInstant = from.atStartOfDay(ECUADOR).toInstant();
         Instant toInstant = to.plusDays(1).atStartOfDay(ECUADOR).toInstant();
-        Object[] result = reportRepository.paymentsTotals(fromInstant, toInstant);
+        List<Object[]> rows = reportRepository.paymentsTotals(fromInstant, toInstant);
+        Object[] result = rows.isEmpty() ? null : rows.get(0);
         if (result == null || result[0] == null) {
             return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
         }

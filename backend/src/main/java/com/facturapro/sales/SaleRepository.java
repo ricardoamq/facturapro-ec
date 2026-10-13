@@ -15,6 +15,13 @@ public interface SaleRepository extends JpaRepository<Sale, Long>, JpaSpecificat
 
     Optional<Sale> findByNumber(String number);
 
+    /**
+     * Trae la venta con los renglones ya inicializados para poder serializarla o
+     * generar el PDF fuera de la transaccion (open-in-view deshabilitado).
+     */
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = "items")
+    Optional<Sale> findWithItemsByNumber(String number);
+
     boolean existsByNumber(String number);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)

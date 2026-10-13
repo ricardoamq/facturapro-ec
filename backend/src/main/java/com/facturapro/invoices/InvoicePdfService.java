@@ -95,14 +95,14 @@ public class InvoicePdfService {
                     body { font-family: DejaVu, sans-serif; font-size: 11px; color: #1f2937; }
                     h1 { font-size: 18px; margin: 0 0 2px 0; }
                     .header { display: flex; justify-content: space-between; border-bottom: 2px solid #0f766e; padding-bottom: 10px; margin-bottom: 14px; }
-                    .box { border: 1px solid #d1d5db; border-radius: 6px; padding: 10px; width: 48%; }
+                    .box { border: 1px solid #d1d5db; border-radius: 6px; padding: 10px; width: 48%%; }
                     .box h2 { font-size: 12px; margin: 0 0 6px 0; text-transform: uppercase; color: #0f766e; }
                     .muted { color: #6b7280; font-size: 10px; }
-                    table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+                    table { width: 100%%; border-collapse: collapse; margin-top: 14px; }
                     th { background: #f0fdfa; color: #115e59; text-align: left; padding: 6px; border-bottom: 1px solid #99f6e4; font-size: 10px; text-transform: uppercase; }
                     td { padding: 6px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
                     .c { text-align: center; } .r { text-align: right; }
-                    .totals { margin-top: 14px; margin-left: auto; width: 45%; }
+                    .totals { margin-top: 14px; margin-left: auto; width: 45%%; }
                     .totals td { padding: 4px 6px; }
                     .totals .grand td { font-weight: bold; font-size: 13px; border-top: 2px solid #0f766e; }
                     .void-badge { margin-top: 10px; color: #b91c1c; font-size: 22px; font-weight: bold; text-align: center; border: 2px solid #b91c1c; padding: 6px; }
@@ -138,8 +138,8 @@ public class InvoicePdfService {
                     <div class="box">
                       <h2>Documento</h2>
                       <div>Tipo: Factura comercial interna</div>
-                      <div>SRI: <b>No autorizado electr&oacute;nicamente</b></div>
-                      <div>Moneda: D&oacute;lares de los EE.UU. (USD)</div>
+                      <div>SRI: <b>No autorizado electrónicamente</b></div>
+                      <div>Moneda: Dólares de los EE.UU. (USD)</div>
                       <div class="muted">Este documento no reemplaza al comprobante autorizado por el SRI.</div>
                     </div>
                   </div>

@@ -12,6 +12,14 @@ import java.util.List;
 
 public interface StockMovementRepository extends JpaRepository<StockMovement, Long>, JpaSpecificationExecutor<StockMovement> {
 
+    /**
+     * Carga el producto en la misma consulta (join fetch) para poder serializar
+     * los movimientos fuera de la transaccion (open-in-view deshabilitado).
+     */
+    @Override
+    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = "product")
+    Page<StockMovement> findAll(org.springframework.data.jpa.domain.Specification<StockMovement> spec, Pageable pageable);
+
     boolean existsByProductId(Long productId);
 
     @Query("select m from StockMovement m where m.product.id = :productId order by m.createdAt desc")
