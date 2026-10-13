@@ -10,13 +10,18 @@ import com.facturapro.users.UserRepository;
 import com.facturapro.users.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,15 +46,22 @@ public class AuthService {
     private final AuditService auditService;
     private final CurrentUser currentUser;
     private final AppProperties appProperties;
+    private final SecurityContextRepository securityContextRepository;
 
     @Transactional
-    public AuthDtos.SessionResponse login(AuthDtos.LoginRequest request) {
+    public AuthDtos.SessionResponse login(AuthDtos.LoginRequest request,
+                                          HttpServletRequest httpRequest,
+                                          HttpServletResponse httpResponse) {
         String username = request.username().trim();
         try {
             var authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, request.password()));
             AuthUser authUser = (AuthUser) authentication.getPrincipal();
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Spring Security 6: guardar explicitamente el contexto para crear la sesion (JSESSIONID).
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            context.setAuthentication(authentication);
+            SecurityContextHolder.setContext(context);
+            securityContextRepository.saveContext(context, httpRequest, httpResponse);
             User user = userRepository.findByUsername(authUser.getUsername()).orElseThrow();
             userService.recordSuccessfulLogin(user);
             auditService.recordAs(user.getUsername(), user.getId(), "LOGIN_SUCCESS", "SESSION", user.getId(),
@@ -78,7 +90,7 @@ public class AuthService {
     }
 
     @Transactional
-    public void logout() {
+    public void logout(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
         try {
             AuthUser user = currentUser.require();
             auditService.record("LOGOUT", "SESSION", user.getId(), "Cierre de sesion");
@@ -86,6 +98,11 @@ public class AuthService {
             // Sesion ya invalida.
         }
         SecurityContextHolder.clearContext();
+        securityContextRepository.saveContext(SecurityContextHolder.createEmptyContext(), httpRequest, httpResponse);
+        HttpSession session = httpRequest.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
     }
 
     @Transactional(readOnly = true)

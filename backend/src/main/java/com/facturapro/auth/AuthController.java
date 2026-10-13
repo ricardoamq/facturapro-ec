@@ -23,13 +23,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthDtos.SessionResponse login(@Valid @RequestBody AuthDtos.LoginRequest request,
-                                          HttpServletRequest httpRequest) {
-        return authService.login(request);
+                                          HttpServletRequest httpRequest,
+                                          jakarta.servlet.http.HttpServletResponse httpResponse) {
+        return authService.login(request, httpRequest, httpResponse);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout() {
-        authService.logout();
+    public ResponseEntity<Void> logout(HttpServletRequest httpRequest,
+                                       jakarta.servlet.http.HttpServletResponse httpResponse) {
+        authService.logout(httpRequest, httpResponse);
         return ResponseEntity.noContent().build();
     }
 
