@@ -6,6 +6,32 @@ Sistema de facturación e inventario para negocios ecuatorianos: ventas en punto
 
 **¿Primera vez usando el sistema?** Lee la [Guía de uso](docs/GUIA-DE-USO.md): cómo arrancar todo, iniciar sesión con cada rol y recorrer cada módulo paso a paso.
 
+> **Estado:** desarrollo local activo. **No hay demo pública**: el sistema se ejecuta en local siguiendo los pasos de abajo.
+
+<details>
+<summary><b>🌐 English summary</b></summary>
+
+**FacturaPro EC** is an invoicing and inventory system for Ecuadorian businesses: point of sale, purchases, receivables, stock control, reports and audit trail. It pairs a **Spring Boot 3 (Java 21)** API with a **React 19 + TypeScript** frontend on **MySQL 8.4**.
+
+Highlights: backend-enforced roles (`@PreAuthorize`), CSRF-protected sessions, a POS where the **backend calculates the official amounts**, sequential yearly invoicing with PDF output, transactional inventory with traceable movements, reports with CSV export, dashboard KPIs and an immutable audit log.
+
+> Invoices are **internal documents** — they are *not* electronically authorized by Ecuador's SRI. E-invoicing is not implemented.
+
+**Run it locally:** create the MySQL database → `mvn -DskipTests package` and run the jar with `--spring.profiles.active=demo` (port `8085`) → `npm install && npm run dev` in `frontend/` (port `5173`). The step-by-step guide is [docs/GUIA-DE-USO.md](docs/GUIA-DE-USO.md); API reference in [docs/API.md](docs/API.md).
+
+**No public demo.** Known limitations: no SRI XML/access keys, password recovery works in dev mode only, no Docker/CI deployment yet.
+
+</details>
+
+---
+
+## Capturas
+
+<p align="center">
+  <img src="docs/screenshots/dashboard.png" alt="Panel principal de FacturaPro EC: ventas del día, cartera por cobrar, gráfico de 14 días y actividad reciente" width="48%" />
+  <img src="docs/screenshots/punto-de-venta.png" alt="Punto de venta de FacturaPro EC: búsqueda de productos, totales con IVA y emisión de venta" width="48%" />
+</p>
+
 ---
 
 ## Características
