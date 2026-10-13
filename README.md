@@ -4,6 +4,8 @@ Sistema de facturación e inventario para negocios ecuatorianos: ventas en punto
 
 > Los comprobantes que genera este sistema son **internos (no autorizados electrónicamente por el SRI)**. La facturación electrónica no está implementada; el sistema deja explícito ese estado en cada documento.
 
+**¿Primera vez usando el sistema?** Lee la [Guía de uso](docs/GUIA-DE-USO.md): cómo arrancar todo, iniciar sesión con cada rol y recorrer cada módulo paso a paso.
+
 ---
 
 ## Características
@@ -146,6 +148,7 @@ node scripts\e2e-proxy-test.mjs
 
 ## Documentación
 
+- [docs/GUIA-DE-USO.md](docs/GUIA-DE-USO.md) — **guía práctica**: arranque, inicio de sesión y uso de cada módulo.
 - [docs/FUNCIONAMIENTO.md](docs/FUNCIONAMIENTO.md) — arquitectura, flujos y reglas de negocio.
 - [docs/API.md](docs/API.md) — referencia de los endpoints REST.
 - Swagger UI: `http://localhost:8085/swagger-ui.html`
