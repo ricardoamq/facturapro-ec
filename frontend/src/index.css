@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --brand: #0f766e;
+}
+
+.dark {
+  --bg: #0b1220;
+  --surface: #111c30;
+  --border: #24324a;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --brand: #14b8a6;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-foreground: var(--text);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+}
+
+@layer base {
+  html {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    margin: 0;
+  }
+  * {
+    border-color: var(--border);
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface border border-border rounded-xl shadow-sm;
+  }
+  .input {
+    @apply w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm
+      placeholder:text-muted focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wide text-muted mb-1;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer bg-brand text-white hover:opacity-90;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer bg-surface border border-border text-foreground hover:bg-background;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer bg-red-600 text-white hover:bg-red-700;
+  }
+  .th {
+    @apply px-3 py-2 text-left text-[11px] font-bold uppercase tracking-wider text-muted;
+  }
+  .td {
+    @apply px-3 py-2 text-sm border-t border-border;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
