@@ -1,0 +1,13 @@
+# Perfil de DEMOSTRACION: solo para entornos de desarrollo.
+# Activa la carga de datos ficticios al arrancar. Nunca usar en produccion.
+app:
+  demo:
+    enabled: true
+  admin:
+    initial-username: admin
+    initial-password: AdminDemo12345!
+    initial-full-name: Administrador Demo
+
+logging:
+  level:
+    com.facturapro: INFO

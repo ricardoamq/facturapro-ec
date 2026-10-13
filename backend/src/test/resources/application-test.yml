@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/facturapro_test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Guayaquil&characterEncoding=UTF-8
+    username: ${DB_TEST_USER:facturapro}
+    password: ${DB_TEST_PASSWORD:facturapro_dev_2026}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+app:
+  admin:
+    initial-username: admin
+    initial-password: AdminTest12345!
+    initial-full-name: Administrador de Pruebas
+  demo:
+    enabled: false
+  mail:
+    dev-logging-enabled: true
+
+logging:
+  level:
+    com.facturapro: INFO
+    org.hibernate.SQL: WARN
