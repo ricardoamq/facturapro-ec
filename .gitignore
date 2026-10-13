@@ -1,0 +1,26 @@
+# Backend
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Entornos y secretos
+.env
+.env.local
+.env.*.local
+*.log
+
+# IDE / SO
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Datos locales de infraestructura (no versionar)
+mysql-data/
+*.zip
